@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: karuturi_reddy
+  labels:
+    app: karuturi_reddy
+  name: karuturi_reddy
+spec:
+  ports:
+  
+    - protocol: TCP
+      port: 1223
+      targetPort: 1223
+   
+   
+  selector:
+    app: karuturi_reddy
+  type: ClusterIP

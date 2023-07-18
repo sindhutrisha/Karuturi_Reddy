@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: karuturi_reddy
+  name: karuturi_reddy
+  labels:
+    app: karuturi_reddy
+spec:
+  selector:
+    matchLabels:
+      app: karuturi_reddy
+  template:
+    metadata:
+      labels:
+        app: karuturi_reddy
+        name: karuturi_reddy
+    spec:
+      containers:
+        - name: karuturi_reddy
+          image: sindhutrisha/Karuturi_Reddy/karuturi_reddy
+          imagePullPolicy: Always
+        
+          env:
+            - name: SERVICE_NAME
+              value: "go-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "localhost:4317"
+            - name: INSECURE_MODE
+              value: "true"
+        
+          ports:
+        
+        
+          - containerPort: 1223
+            name: http
+        
+        
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+        
